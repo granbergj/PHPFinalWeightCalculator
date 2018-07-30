@@ -1,0 +1,123 @@
+mysql -u root;
+
+CREATE DATABASE exerciseLog;
+
+USE exerciseLog;
+
+CREATE TABLE exercise_user(
+    -> user_id int(11) NOT NULL AUTO_INCREMENT,
+    -> username varchar(32) NOT NULL,
+    -> password varchar(40) NOT NULL,
+    -> join_date datetime DEFAULT NULL,
+    -> first_name varchar(32) DEFAULT NULL,
+    -> last_name varchar(32) DEFAULT NULL,
+    -> gender varchar(1) DEFAULT NULL,
+    -> birthdate date DEFAULT NULL,
+    -> weight int(5) DEFAULT NULL,
+    -> PRIMARY KEY (user_id)
+       );
+       
+DESCRIBE exercise_user;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| user_id    | int(11)     | NO   | PRI | NULL    | auto_increment |
+| username   | varchar(32) | NO   |     | NULL    |                |
+| password   | varchar(40) | NO   |     | NULL    |                |
+| join_date  | datetime    | YES  |     | NULL    |                |
+| first_name | varchar(32) | YES  |     | NULL    |                |
+| last_name  | varchar(32) | YES  |     | NULL    |                |
+| gender     | varchar(1)  | YES  |     | NULL    |                |
+| birthdate  | date        | YES  |     | NULL    |                |
+| weight     | int(5)      | YES  |     | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
+9 rows in set (0.00 sec)
+
+
+mysql> ALTER TABLE exercise_user 
+    -> ADD picture VARCHAR(32);
+Query OK, 1 row affected (0.32 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE  exercise_user;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| user_id    | int(11)     | NO   | PRI | NULL    | auto_increment |
+| username   | varchar(32) | NO   |     | NULL    |                |
+| password   | varchar(40) | NO   |     | NULL    |                |
+| join_date  | datetime    | YES  |     | NULL    |                |
+| first_name | varchar(32) | YES  |     | NULL    |                |
+| last_name  | varchar(32) | YES  |     | NULL    |                |
+| gender     | varchar(1)  | YES  |     | NULL    |                |
+| birthdate  | date        | YES  |     | NULL    |                |
+| weight     | int(5)      | YES  |     | NULL    |                |
+| picture    | varchar(32) | YES  |     | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
+
+
+mysql> SELECT * FROM exercise_user;
++---------+----------+------------------------------------------+---------------------+------------+-----------+--------+------------+--------+-----------+
+| user_id | username | password                                 | join_date           | first_name | last_name | gender | birthdate  | weight | picture   |
++---------+----------+------------------------------------------+---------------------+------------+-----------+--------+------------+--------+-----------+
+|       1 | Justin   | 472773a6ed75d54105448a76fbfe880c92ec99f2 | 2016-03-14 19:53:17 | Justin     | Granberg  | M      | 1980-01-15 |    160 | index.png |
++---------+----------+------------------------------------------+---------------------+------------+-----------+--------+------------+--------+-----------+
+
+mysql> CREATE TABLE exercise_log(
+    -> exercise_id int(11) NOT NULL AUTO_INCREMENT,
+    -> user_id int(11) NOT NULL,
+    -> date datetime DEFAULT NULL,
+    -> type_of_exercise varchar(25) DEFAULT NULL,
+    -> time_in_minutes time DEFAULT NULL,
+    -> heartrate decimal(9,2) DEFAULT NULL,
+    -> PRIMARY KEY (exercise_id)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> DESCRIBE exercise_log;
++------------------+--------------+------+-----+---------+----------------+
+| Field            | Type         | Null | Key | Default | Extra          |
++------------------+--------------+------+-----+---------+----------------+
+| exercise_id      | int(11)      | NO   | PRI | NULL    | auto_increment |
+| user_id          | int(11)      | NO   |     | NULL    |                |
+| date             | datetime     | YES  |     | NULL    |                |
+| type_of_exercise | varchar(25)  | YES  |     | NULL    |                |
+| time_in_minutes  | time         | YES  |     | NULL    |                |
+| heartrate        | decimal(9,2) | YES  |     | NULL    |                |
++------------------+--------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> ALTER TABLE exercise_log
+    -> ADD calories_burned decimal(9,2) DEFAULT NULL;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE exercise_log;
++------------------+--------------+------+-----+---------+----------------+
+| Field            | Type         | Null | Key | Default | Extra          |
++------------------+--------------+------+-----+---------+----------------+
+| exercise_id      | int(11)      | NO   | PRI | NULL    | auto_increment |
+| user_id          | int(11)      | NO   |     | NULL    |                |
+| date             | datetime     | YES  |     | NULL    |                |
+| type_of_exercise | varchar(25)  | YES  |     | NULL    |                |
+| time_in_minutes  | time         | YES  |     | NULL    |                |
+| heartrate        | decimal(9,2) | YES  |     | NULL    |                |
+| calories_burned  | decimal(9,2) | YES  |     | NULL    |                |
++------------------+--------------+------+-----+---------+----------------+
+7 rows in set (0.00 sec)
+
+the time data type requires hours:min:sec so need to use an int
+
+mysql> DESCRIBE exercise_log;
++------------------+--------------+------+-----+---------+----------------+
+| Field            | Type         | Null | Key | Default | Extra          |
++------------------+--------------+------+-----+---------+----------------+
+| exercise_id      | int(11)      | NO   | PRI | NULL    | auto_increment |
+| user_id          | int(11)      | NO   |     | NULL    |                |
+| date             | datetime     | YES  |     | NULL    |                |
+| type_of_exercise | varchar(25)  | YES  |     | NULL    |                |
+| time_in_minutes  | int(10)      | YES  |     | NULL    |                |
+| heartrate        | decimal(9,2) | YES  |     | NULL    |                |
+| calories_burned  | decimal(9,2) | YES  |     | NULL    |                |
++------------------+--------------+------+-----+---------+----------------+
+7 rows in set (0.01 sec)

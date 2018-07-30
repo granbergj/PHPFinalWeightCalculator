@@ -1,0 +1,25 @@
+body 
+{
+    padding-left: 30px;
+}
+.error {
+    font-weight: bold;
+    color: #FF0000;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.center
+{
+    text-align: center;
+}
+
+.nav
+{
+    text-align: center;
+    font-size: medium;
+}
+
